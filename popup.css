@@ -1,0 +1,75 @@
+/* Basic styling */
+body{
+  min-width: 300px;
+  padding: 0px;
+  margin: 0px;
+  background: #ecedef url(http://spigotdesign.com/wp-content/themes/spigot/img/structure/body-bg.png) repeat -50% 0 fixed;
+}
+
+/* Scaffolding */
+.top-menu{
+	font-size: 20px;
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 27px;
+}
+.index-text{
+  font-family: "Bitter", serif;
+  margin:0 0 0 3px;
+  color: #555;
+}
+
+/* Label list styling */
+ul.list{
+list-style-type: none;
+padding:30px 0 3px 3px;
+margin:0;
+}
+.card-label{
+	border-radius:3px;
+	display:block;
+	font-weight:bold;
+	margin-right:3px;
+	padding:3px 6px;
+	overflow:hidden;
+	/*white-space:nowrap;*/
+	font-size: 12px;
+	/*text-overflow:ellipsis;*/
+	/*text-shadow:0 1px rgba(0, 0, 0, 0.4),0 0 3px #000000;*/
+}
+.card-label.selectable{
+	border-radius:3px;
+	color:#eee;
+	cursor:pointer;
+	margin:0 24px 3px 3px;
+	min-height:15px;
+	min-width:100px;
+	padding:6px;
+	position:relative;
+	-moz-transition-property:margin-right;
+	-webkit-transition-property:margin-right;
+	-moz-transition-duration:0.10s;
+	-webkit-transition-duration:0.10s;
+	-moz-transition-timing-function:ease-out;
+	-webkit-transition-timing-function:ease-out;
+	-moz-transition-delay:0.05s;
+	-webkit-transition-delay:0.05s;
+}
+.card-label.selectable.active:hover,.card-label.selectable.active,.card-label.selectable.active.selected:hover,.card-label.selectable.active.selected{margin-right:0;
+}
+.card-label.selectable.active:hover:hover,.card-label.selectable.active:hover,.card-label.selectable.active.selected:hover:hover,.card-label.selectable.active.selected:hover{
+	margin-right:0;
+}
+.card-label.selectable.selected,.card-label.selectable:hover{
+	margin-right:18px;
+}
+.card-label.blue-label{background-color:#b3d4ff;color:#2F2F2F}
+.card-label.green-label{background-color:#C7EDCC;color:#2F2F2F}
+.card-label.black-label{background-color:#000000;color:#00FF00}
+.card-label.pink-label{background-color:#fbdbe8;color:#2F2F2F}
+.card-label.yellow-label{background-color:#dbdb57;}
+.card-label.orange-label{background-color:#e09952	;}	
+.card-label.red-label{background-color:#cb4d4d;}
+.card-label.purple-label{background-color:#9933cc;}
+

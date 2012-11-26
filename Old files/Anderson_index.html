@@ -1,0 +1,64 @@
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<div class="content">
+	<div class="hero-unit">
+  	
+  	<h1 class="index-text">Virtual Repository</h1>
+  	
+  </div>
+	
+  <div class="span4 offset4 center">
+		<table>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</p>
+			<h1>lorem 2</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</p>	 
+			<div id="msg"></div>
+			<input id="btn" type="button" value="Click!!" />
+			<h3>value:</h3>
+			  
+		
+		</table>
+	</div> 
+	
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	$("#btn").click(test)
+	});
+
+	
+	function test(){
+		var Paragraph = $("p");
+		var Splitted_paragraph = new Array();
+		Splitted_paragraph = Paragraph.split(".");
+		//Splitted_paragraph = Paragraph.match(/[^.*\.\s]+/);
+		console.log(Splitted_paragraph[0]);
+		Paragraph.css({"background-color": "#C7EDCC", "color": "#2F2F2F", "border": "2px solid #C2E9C8"});
+		//Paragraph.css({"background-color": "#000000", "color": "#00ed00", "border": "2px solid #C2E9C8"});
+	};
+	
+	test();
+	
+</script>

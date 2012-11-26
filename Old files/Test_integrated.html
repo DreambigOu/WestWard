@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	div { background:yellow; margin:5px; }
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+	<span>Click a div!</span>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>Third p.</p>
+	<p>He is Dr. Wang. The cookie is good to eat.</p>
+	<div id="msg"></div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$.fn.cssGet = function (propertyArray) {
+
+    //create an output variable and limit this function to finding info for only the first element passed into the //function
+    var output = {},
+        self   = this.eq(0);
+
+    //iterate through the properties passed into the function and add them to the output variable
+    for (var i = 0, len = propertyArray.length; i < len; i++) {
+        output[propertyArray[i]] = this.css(propertyArray[i]);
+    }
+    return output;
+	};
+
+	var WESTWARD = {
+			
+			// Variables
+			DesiredCSS: {
+				'color': '#222222',
+				'background-color': '#C7EDCC'
+			},
+			DetectedCss: "",
+			OriginalCSS: {
+				'color':'black', 
+				'background-color': '#FFFFFF'
+			},
+			IndexOfParagraph: 0,
+			IndexOfSentence: 0,
+
+			// Arrays
+			LengthOfParagraph: [],
+			LengthOfSentences: []
+	};
+
+	WestwardMain(WESTWARD);
+	//$("#msg").html("<h1>Length of paragraph: "+ LengthOfParagraph + "<br>Length of sentences: " + LengthOfSentences[IndexOfParagraph] + "<br>Index of paragraph " + IndexOfParagraph + "<br>Index of sentence: " + IndexOfSentence+ "</h1>").css({"background-color": "#C7EDCC", "color": "#2F2F2F", "border": "2px solid #C2E9C8"}).fadeIn();
+
+
+});
+
+function WestwardMain(WESTWARD){
+ 
+  var ArrayOfParagraph = $("p").get();
+
+  // Reference : http://stackoverflow.com/questions/9269385/get-multiple-css-properties-with-jquery
+  WESTWARD.DetectedCss = $("p").cssGet(['background-color','color']);
+ 
+  WESTWARD.LengthOfParagraph = ArrayOfParagraph.length;
+  //alert("ArrayOfParagraph Length is" + ArrayOfParagraph.length);
+  
+  for(i=0; i < ArrayOfParagraph.length; ++i)
+  {
+  
+	var ArrayOfSentence = ArrayOfParagraph[i].innerHTML.split('.');
+	WESTWARD.LengthOfSentences.push(ArrayOfSentence.length-1);
+	var tempHTML = "";
+
+	// Cases including:
+	// Case1: Mr., Mrs. and Dr. 
+	// Case2: i.e.,
+	// Case3: et al.
+	// Case4: etc.
+	// Case4: a.k.a.
+	// Case5: ...
+
+		for(j=0; j < ArrayOfSentence.length-1; ++j)
+		{
+			tempHTML += ('<span>' + ArrayOfSentence[j] + '. ' + '</span>'); 
+		}; // END of for j
+
+ 		ArrayOfParagraph[i].innerHTML = tempHTML;	
+	}; // END of for i
+
+	KeyboardEvent(WESTWARD);
+
+};
+
+function KeyboardEvent(WESTWARD){
+
+	$(document).bind("keydown", function(event){
+
+		var keyCode = event.keyCode || event.which;
+		event.preventDefault();
+		
+		// Press "Spacebar"
+		//==========================================================================>
+		if (keyCode == 32 && WESTWARD.IndexOfParagraph == 0 && WESTWARD.IndexOfSentence == 0 )
+		{
+			//$.getScript("ApplyCSS.js", function(){
+			ApplyCSS(WESTWARD);
+			//});
+		};
+
+		// Press ">"
+		//==========================================================================>
+		if (keyCode == 190)
+		{
+			RestoreCSS(WESTWARD);
+			WESTWARD.IndexOfSentence +=1;						
+			// check the upper boundries of the sentences
+			if (WESTWARD.IndexOfSentence >= WESTWARD.LengthOfSentences[WESTWARD.IndexOfParagraph])
+			{
+				// check the upper boundries of the paragraphs
+				if (WESTWARD.IndexOfParagraph >= WESTWARD.LengthOfParagraph-1)
+				{
+					WESTWARD.IndexOfSentence -=1;
+				}
+				else
+				{
+					WESTWARD.IndexOfParagraph +=1;
+					WESTWARD.IndexOfSentence = 0;
+				}; // END if IndexOfParagraph				
+			}// END if IndexOfSentence
+			
+			ApplyCSS(WESTWARD);
+
+		};
+
+		// Press "<"
+		//==========================================================================>
+		if (keyCode == 188)
+		{
+			RestoreCSS(WESTWARD);
+			
+			WESTWARD.IndexOfSentence -=1;						
+			// check the bottom boundries of the sentences
+			if (WESTWARD.IndexOfSentence < 0)
+			{
+				// check the bottom boundries of the paragraphs
+				if (WESTWARD.IndexOfParagraph == 0)
+				{
+					WESTWARD.IndexOfSentence +=1;
+				}
+				else
+				{
+					WESTWARD.IndexOfParagraph -=1;
+					WESTWARD.IndexOfSentence = WESTWARD.LengthOfSentences[WESTWARD.IndexOfParagraph]-1;
+				}; // END if IndexOfParagraph				
+			}// END if IndexOfSentence
+			
+			ApplyCSS(WESTWARD);
+			
+		}; // END if keyCode
+
+		// Debug panel
+		$("#msg").html(
+			"<h1>" +
+			"Variable: " + WESTWARD.DetectedCss['color'] + "<br>" +
+			"Variable: " + WESTWARD.DetectedCss['background-color'] + "<br>" +
+			"Length of paragraph: " + WESTWARD.LengthOfParagraph + "<br>" +
+			"Length of sentences: " + WESTWARD.LengthOfSentences[WESTWARD.IndexOfParagraph] + "<br>" +
+			"Index of paragraph " + WESTWARD.IndexOfParagraph + "<br>" +
+			"Index of sentence: " + WESTWARD.IndexOfSentence + 
+			"</h1>"
+			).css({"background-color": "#C7EDCC", "color": "#2F2F2F", "border": "2px solid #C2E9C8"}).fadeIn();
+
+	}); // END bind
+}; // END function keyboard_event
+
+function ApplyCSS(WESTWARD){
+	var SelectorApplying;
+
+	SelectorApplying = "p:eq(" + WESTWARD.IndexOfParagraph + ") > span:eq(" + WESTWARD.IndexOfSentence + ")";
+	$(SelectorApplying).css(WESTWARD.DesiredCSS);
+
+};
+
+function RestoreCSS(WESTWARD){
+	var SelectorRestoring
+
+	SelectorRestoring = "p:eq(" + WESTWARD.IndexOfParagraph + ") > span:eq(" + WESTWARD.IndexOfSentence + ")";
+	$(SelectorRestoring).css(WESTWARD.OriginalCSS);
+	//$(SelectorRestoring).css({"color": WESTWARD.DetectedCSS['color'], "background-color": WESTWARD.DetectedCSS['background-color']});
+
+};
+
+</script>
+
+</body>
+</html>
