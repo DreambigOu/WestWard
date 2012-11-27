@@ -76,8 +76,12 @@ function ExtractPtagTest(WESTWARD)
 
         for (var i = 0; i < ArrayOfParagraph.length; ++i) {
         
-        ArrayOfSentence[i] = ArrayOfParagraph[i].innerHTML.split('.');
-        alert(ArrayOfSentence[i]);
+            ArrayOfSentence[i] = ArrayOfParagraph[i].innerHTML.split('.');
+            alert("NEW P TAG");
+
+            for (var j = 0; j < ArrayOfSentence[i].length; j++) {
+                alert(ArrayOfSentence[i][j]);
+            };
 
     };// End of Step1 outer loop
 
